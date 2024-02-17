@@ -1,0 +1,14 @@
+.imageCard{
+    position: relative;
+}
+
+.imageCard img{
+    width: 100%;
+    height: auto;
+}
+
+.banner-text{
+    position: absolute;
+    top: 35%;
+    left: 20%;
+}

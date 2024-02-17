@@ -6,15 +6,15 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import axios from 'axios';
-
-
+import { useNavigate } from 'react-router-dom';
 
 function Signup() {
+  const navigate = useNavigate()
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     password: '',
-    value:''
+    value: ''
   });
 
   const handleSubmit = async (e) => {
@@ -33,8 +33,9 @@ function Signup() {
         name: '',
         email: '',
         password: '',
-        value:''
+        value: ''
       })
+      navigate('/login')
     } catch (err) {
       console.log(err)
     }
@@ -51,11 +52,11 @@ function Signup() {
             aria-labelledby="demo-row-radio-buttons-group-label"
             name="row-radio-buttons-group"
             value={formData.value}
-            onChange={(e)=> setFormData({...formData,value:e.target.value})}
+            onChange={(e) => setFormData({ ...formData, value: e.target.value })}
           >
             <FormControlLabel value="patient" control={<Radio />} label="patient" />
-            <FormControlLabel value="sales" control={<Radio color='secondary'/>} label="sales" />
-            <FormControlLabel value="physio" control={<Radio color="success"/>} label="physio" />
+            <FormControlLabel value="sales" control={<Radio color='secondary' />} label="sales" />
+            <FormControlLabel value="physio" control={<Radio color="success" />} label="physio" />
           </RadioGroup>
         </FormControl>
         <label>
@@ -64,7 +65,7 @@ function Signup() {
             type="text"
             name="name"
             value={formData.name}
-            onChange={(e)=> setFormData({...formData,name:e.target.value})}
+            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
           />
         </label>
         <label>
@@ -73,7 +74,7 @@ function Signup() {
             type="email"
             name="email"
             value={formData.email}
-            onChange={(e)=> setFormData({...formData,email:e.target.value})}
+            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
           />
         </label>
         <label>
@@ -82,10 +83,13 @@ function Signup() {
             type="password"
             name="password"
             value={formData.password}
-            onChange={(e)=> setFormData({...formData,password:e.target.value})}
+            onChange={(e) => setFormData({ ...formData, password: e.target.value })}
           />
         </label>
         <button type="submit">Sign Up</button>
+        <p className='text-center'>
+          Alredy have an account? <a href="/login">Login</a>
+        </p>
       </form>
     </div>
   )
