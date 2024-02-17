@@ -1,0 +1,12 @@
+.topLine{
+    border-top: 20px solid rgb(59,70,90);
+    opacity: inherit;
+    margin-top: 0px;
+    /* position: fixed; */
+    top: 0px;
+    width: 100%;
+    flex-direction: row;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+}
