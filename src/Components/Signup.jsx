@@ -7,22 +7,15 @@ import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import axios from 'axios';
 
-//RADIO BUTTON NOT HANDLED
+
 
 function Signup() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     password: '',
+    value:''
   });
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -30,15 +23,17 @@ function Signup() {
     const signupBody = {
       name: formData.name,
       email: formData.email,
-      password: formData.password
+      password: formData.password,
+      userType: formData.value
     }
     try {
       const response = await axios.post('http://127.0.0.1:3000/api/user/signup', signupBody)
-      console.log(response.body)
+      console.log(response.body) //ERROR UNDEFINED ???????????
       setFormData({
         name: '',
         email: '',
-        password: ''
+        password: '',
+        value:''
       })
     } catch (err) {
       console.log(err)
@@ -50,15 +45,17 @@ function Signup() {
       <form className="signup-form" onSubmit={handleSubmit}>
         <h2>Sign Up</h2>
         <FormControl>
-          <FormLabel id="demo-row-radio-buttons-group-label">Select Role</FormLabel>
+          <FormLabel id="demo-row-radio-buttons-group-label">Select a Role</FormLabel>
           <RadioGroup
             row
             aria-labelledby="demo-row-radio-buttons-group-label"
             name="row-radio-buttons-group"
+            value={formData.value}
+            onChange={(e)=> setFormData({...formData,value:e.target.value})}
           >
             <FormControlLabel value="patient" control={<Radio />} label="patient" />
-            <FormControlLabel value="sales" control={<Radio />} label="sales" />
-            <FormControlLabel value="physio" control={<Radio />} label="physio" />
+            <FormControlLabel value="sales" control={<Radio color='secondary'/>} label="sales" />
+            <FormControlLabel value="physio" control={<Radio color="success"/>} label="physio" />
           </RadioGroup>
         </FormControl>
         <label>
@@ -67,7 +64,7 @@ function Signup() {
             type="text"
             name="name"
             value={formData.name}
-            onChange={handleChange}
+            onChange={(e)=> setFormData({...formData,name:e.target.value})}
           />
         </label>
         <label>
@@ -76,7 +73,7 @@ function Signup() {
             type="email"
             name="email"
             value={formData.email}
-            onChange={handleChange}
+            onChange={(e)=> setFormData({...formData,email:e.target.value})}
           />
         </label>
         <label>
@@ -85,7 +82,7 @@ function Signup() {
             type="password"
             name="password"
             value={formData.password}
-            onChange={handleChange}
+            onChange={(e)=> setFormData({...formData,password:e.target.value})}
           />
         </label>
         <button type="submit">Sign Up</button>
