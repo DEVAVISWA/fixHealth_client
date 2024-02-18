@@ -12,3 +12,11 @@
     top: 35%;
     left: 20%;
 }
+
+.padding{
+    margin-bottom: 10px;
+}
+
+.radios{    
+    font-style: italic;
+}
