@@ -64,6 +64,9 @@ export const bookingHeaders = ({ type }) => {
       renderCell: (params) => <ActionButton value={params.row} />,
     });
   }
+  if (type === "patient") {
+    headers
+  }
   return headers;
 };
 const ActionButton = ({ value }) => {

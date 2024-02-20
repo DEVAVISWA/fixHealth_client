@@ -38,6 +38,27 @@ export const getPhysioList = async () => {
     });
   });
 };
+//added
+export const getPatientList = async () => {
+  return new Promise((resolve) => {
+    axios.get("/user/get_patient_list").then((res) => {
+      if (res.data.error) {
+        return resolve({
+          status: false,
+          message: res.data.message,
+          data: null,
+        });
+      } else {
+        return resolve({
+          status: true,
+          message: res.data.message,
+          data: res.data.data,
+        });
+      }
+    });
+  });
+};
+//============================================================================
 export const getBookingByID = async (email) => {
   return new Promise((resolve) => {
     axios.get("/booking/get_booking_details_by_id/" + email).then((res) => {
@@ -85,6 +106,7 @@ export const createBooking = async ({ email, name, date, slot }) => {
       slot: slot.id,
       slotNo: slot.slotNo,
     };
+    console.log("lllll", date);
     axios.post("/booking/create_booking", data).then((res) => {
       if (res.data.error) {
         return resolve({

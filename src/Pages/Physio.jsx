@@ -24,21 +24,47 @@ function Physio() {
   const [update, setUpdate] = useState(false);
   const [bookings, setBookings] = useState(null);
   const [headers, setHeaders] = useState(null);
+  
   const handleDateSelect = async (newDate) => {
     const selectedDate = dayjs(newDate).format();
-    setDate(new Date(selectedDate));
+    setDate(selectedDate);
+    console.log("Date here : ", selectedDate)
+    const currda = new Date(selectedDate)
+    currda.setHours(currda.getHours() + 1);
+    console.log(currda)
   };
   const handleClose = () => {
     setOpen(false);
   };
   const handleSlotSelect = async (slot) => {
     dispatch(showBackDrop());
+    const amorpm = slot.slotTime.split(' ')[1];
+    const hour = slot.slotTime.split(' ')[0].split(':')[0]
+    const min = slot.slotTime.split(' ')[0].split(':')[1]
+    console.log(hour)
+    console.log(min)
+    console.log(amorpm)
+    if(amorpm === 'am') {
+    const currda = new Date(date)
+    currda.setHours(currda.getHours() + hour);
+    currda.setMinutes(currda.getMinutes() + min)
+    console.log(currda.toUTCString())
+    setDate(currda.toUTCString())
+    } else {
+    const currda = new Date(date)
+    currda.setHours(currda.getHours() + hour + 12);
+    currda.setMinutes(currda.getMinutes() + min)
+    console.log(currda.toUTCString())
+    setDate(currda.toUTCString())
+    }
     const { status, message } = await createBooking({
       email,
       name,
       date,
       slot,
     });
+    console.log("satte date", date);
+    console.log(slot);
     if (status) {
       dispatch(
         showMessage({
