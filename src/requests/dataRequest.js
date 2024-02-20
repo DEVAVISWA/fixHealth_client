@@ -102,6 +102,37 @@ export const createBooking = async ({ email, name, date, slot }) => {
     });
   });
 };
+
+//added
+export const createPatientBooking = async ({ email, name, date, slot }) => {
+  return new Promise((resolve) => {
+    const data = {
+      email,
+      name,
+      date,
+      slot: slot.id,
+      slotNo: slot.slotNo,
+    };
+    console.log(date)
+    axios.post("/booking/create_patient_booking", data).then((res) => {
+      if (res.data.error) {
+        return resolve({
+          status: false,
+          data: null,
+          message: res.data.message,
+        });
+      } else {
+        return resolve({
+          status: true,
+          message: res.data.message,
+          data: null,
+        });
+      }
+    });
+  });
+};
+//============================================================================================
+
 export const confirmSlot = async ({ bookingID, remarks }) => {
   return new Promise((resolve) => {
     const data = {

@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import dayjs from "dayjs";
 import {
   createBooking,
+  createPatientBooking,
   getAllSlots,
   getBookingByID,
 } from "../requests/dataRequest";
@@ -27,13 +28,14 @@ function Patient() {
   const handleDateSelect = async (newDate) => {
     const selectedDate = dayjs(newDate).format();
     setDate(new Date(selectedDate));
+    console.log(date);
   };
   const handleClose = () => {
     setOpen(false);
   };
   const handleSlotSelect = async (slot) => {
     dispatch(showBackDrop());
-    const { status, message } = await createBooking({
+    const { status, message } = await createPatientBooking({
       email,
       name,
       date,

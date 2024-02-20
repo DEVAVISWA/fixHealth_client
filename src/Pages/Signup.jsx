@@ -29,7 +29,7 @@ function Signup() {
     };
     try {
       const response = await axios.post(
-        "https://fixhealth-server-ld2v.onrender.com/api/user/signup",
+        "http://127.0.0.1:3000/api/user/signup",
         signupBody
       );
       console.log(response.body); //ERROR UNDEFINED ???????????
